@@ -2,59 +2,35 @@
 {
     static void Main()
     {
-        Console.WriteLine("Введите количество строк массива:");
-        string raws = Console.ReadLine();
-        Console.WriteLine("Введите количество столбцов массива:");
-        string columns = Console.ReadLine();
+        Console.Write("Введите число строк: ");
+        int rows = GetInt();
 
-        int firstDimension;
-        int secondDimension;
+        Console.Write("Введите число столбцов: ");
+        int cols = GetInt();
 
-        // провекрка корректности размеров массива
-        if (!int.TryParse(raws, out firstDimension) ||
-            !int.TryParse(columns, out secondDimension))
-            throw new Exception("Вы ввели не число!");
+        int[,] array = new int[rows, cols];
 
-        var array = new int[firstDimension, secondDimension];
-
-
-        Console.WriteLine("Введите элементы массива через пробел, в конце строки нажмите Enter:");
-        for (int i = 0; i < array.GetLength(0); i++)
+        for (int i = 0; i < rows; i++)
         {
-            string enterString = Console.ReadLine();
-            string[] massiveString = enterString.Split(new Char[] { ' ' });
-            for (int j = 0; j < massiveString.Length; j++)
+            for (int j = 0; j < cols; j++)
             {
-                array[i, j] = int.Parse(massiveString[j]);
+                Console.Write($"Введите элемент [{i},{j}]: ");
+                array[i, j] = GetInt();
             }
         }
 
-        //проверка на соответствие массива требуемой размерности
-        if (array.Length != firstDimension * secondDimension)
-            throw new Exception("Неправильный размер массива");
-
-        //проверка на число
-        //for (int i = 0; i < firstDimension; i++)
-        //{
-        //    for (int j = 0; j < secondDimension; j++)
-        //    {
-        //        int next;
-        //        if (int.TryParse(rawArray[i * secondDimension + j], out next))
-        //            array[i, j] = next;
-        //        else
-        //            throw new Exception("Вы ввели не число!"); //если очередной элемент не число
-        //    }
-        //}
-
-        Console.WriteLine("Ваш массив:");
-        for (int i = 0; i < firstDimension; i++)
+        Console.WriteLine("Ваш исходный массив:");
+        for (int i = 0; i < rows; i++)
         {
-            for (int j = 0; j < secondDimension; j++)
-                Console.Write(array[i, j] + " ");
+            for (int j = 0; j < cols; j++)
+            {
+                Console.Write(array[i, j] + "\t");
+            }
             Console.WriteLine();
         }
 
-        Console.WriteLine("Ваш массив после преобразования:");
+
+        Console.WriteLine("Результирующий массив:");
         var result = SpiralOrderCounterClockwise(array);
 
         Console.WriteLine($"[{string.Join(", ", result)}]");
@@ -128,6 +104,21 @@
         }
 
         return result;
+    }
+
+    static int GetInt()
+    {
+        while (true)
+        {
+            if (int.TryParse(Console.ReadLine(), out int num))
+            {
+                return num;
+            }
+            else
+            {
+                Console.Write("Ошибка ввода. Пожалуйста, введите корректное число: ");
+            }
+        }
     }
 }
 
