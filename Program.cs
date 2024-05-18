@@ -2,26 +2,6 @@
 {
     static void Main()
     {
-        //Console.Write("Введите количество строк массива: ");
-        //int rows = int.Parse(Console.ReadLine());
-        //Console.Write("Введите количество столбцов массива: ");
-        //int columns = int.Parse(Console.ReadLine());
-        //Console.WriteLine();
-        //int[,] arr = new int[rows, columns];
-        //Console.WriteLine("Введите элементы массива через пробел, в конце строки нажмите Enter:");
-        //for (int i = 0; i < arr.GetLength(0); i++)
-        //{
-        //    string enterString = Console.ReadLine();
-        //    string[] massiveString = enterString.Split(new Char[] { ' ' });
-        //    for (int j = 0; j < massiveString.Length; j++)
-        //    {
-        //        arr[i, j] = int.Parse(massiveString[j]);
-        //    }
-        //}
-
-
-        
-
         Console.WriteLine("Введите количество строк массива:");
         string raws = Console.ReadLine();
         Console.WriteLine("Введите количество столбцов массива:");
@@ -37,15 +17,6 @@
 
         var array = new int[firstDimension, secondDimension];
 
-        //ввод всех элементов массива в строку
-        //string rawStr = Console.ReadLine();
-        //if (rawStr == null) // проверка массива на пустоту
-        //    throw new Exception("Массив пуст");
-        //var rawArray = rawStr.Split(' ');
-
-        // проверка на соответствие массива требуемой размерности
-        //if (rawArray.Length != firstDimension * secondDimension)
-        //    throw new Exception("Неправильный размер массива");
 
         Console.WriteLine("Введите элементы массива через пробел, в конце строки нажмите Enter:");
         for (int i = 0; i < array.GetLength(0); i++)
@@ -57,6 +28,10 @@
                 array[i, j] = int.Parse(massiveString[j]);
             }
         }
+
+        //проверка на соответствие массива требуемой размерности
+        if (array.Length != firstDimension * secondDimension)
+            throw new Exception("Неправильный размер массива");
 
         //проверка на число
         //for (int i = 0; i < firstDimension; i++)
